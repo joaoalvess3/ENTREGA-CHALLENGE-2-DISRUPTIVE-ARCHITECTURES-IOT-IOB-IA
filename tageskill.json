@@ -1,0 +1,480 @@
+{
+  "intents": [
+    {
+      "intent": "Desempenho",
+      "examples": [
+        {
+          "text": "Como anda o aprendizado dos alunos?"
+        },
+        {
+          "text": "Como estão as médias?"
+        },
+        {
+          "text": "Me ajude a tirar dúvidas em relação ao desempenho dos alunos."
+        },
+        {
+          "text": "Me fale sobre o desempenho dos alunos."
+        },
+        {
+          "text": "Quero saber sobre as notas dos alunos."
+        }
+      ],
+      "description": "Intent criada com o objetivo de capturar perguntas sobre o desempenho dos alunos."
+    },
+    {
+      "intent": "Desempenho_Matérias",
+      "examples": [
+        {
+          "text": "Como os alunos estão em Português?"
+        },
+        {
+          "text": "Geografia"
+        },
+        {
+          "text": "Me fale sobre o desempenho dos alunos em História."
+        },
+        {
+          "text": "Os alunos estão indo bem matemática?"
+        },
+        {
+          "text": "Quero saber sobre matématica."
+        }
+      ],
+      "description": "Intent criada com o objetivo de responder perguntas sobre o desempenho dos alunos em determinada matéria."
+    },
+    {
+      "intent": "Erros_matérias",
+      "examples": [
+        {
+          "text": "Em História, quais foram os assuntos com mais erros?"
+        },
+        {
+          "text": "Onde está a dificuldades em português?"
+        },
+        {
+          "text": "Quais os maiores erros em português?"
+        },
+        {
+          "text": "Quais são os erros dos alunos em geografia?"
+        },
+        {
+          "text": "Qual a maior dificuldade dos alunos em história?"
+        },
+        {
+          "text": "Quero saber sobre a principal dificuldade dos alunos em matemática."
+        }
+      ],
+      "description": "Intent criada com o objetivo de capturar perguntas sobre os principais erros dos alunos em determinada disciplina."
+    },
+    {
+      "intent": "Saudacoes",
+      "examples": [
+        {
+          "text": "Boa noite"
+        },
+        {
+          "text": "Boa tarde"
+        },
+        {
+          "text": "Bom dia"
+        },
+        {
+          "text": "Eai"
+        },
+        {
+          "text": "Fala aí"
+        },
+        {
+          "text": "oi"
+        },
+        {
+          "text": "Olá"
+        }
+      ],
+      "description": "Intent criada para receber saudações"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Matérias",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Geografia",
+          "synonyms": [
+            "geo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "História",
+          "synonyms": [
+            "Hist",
+            "historia"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Matemática",
+          "synonyms": [
+            "Mat",
+            "matematica"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Português",
+          "synonyms": [
+            "Língua portuguesa",
+            "port",
+            "portugues",
+            "PT"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "saudacao",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Bom dia",
+          "synonyms": [
+            "Boa noite",
+            "Boa tarde"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "oba",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "oi",
+          "synonyms": [
+            "eae",
+            "eai",
+            "e aí",
+            "ola",
+            "Olá",
+            "opa"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá, professor. Como posso te ajudar hoje?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_3_1653051695065",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Desempenho_Matéria",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Desempenho_Matérias",
+      "dialog_node": "node_1_1653081772335",
+      "previous_sibling": "node_6_1653144479761"
+    },
+    {
+      "type": "standard",
+      "title": "Desempenho",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "É muito bom ver a sua preocupação com os alunos, professor(a). Você quer saber o desempenho dos alunos em qual matéria? \n-História\n-Matemática\n-Português\n-Geografia"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Desempenho",
+      "dialog_node": "node_3_1653051695065",
+      "previous_sibling": "node_5_1653084805328"
+    },
+    {
+      "type": "standard",
+      "title": "Dificuldades_Matérias",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Erros_matérias",
+      "dialog_node": "node_5_1653084805328",
+      "previous_sibling": "node_1_1653081772335"
+    },
+    {
+      "type": "standard",
+      "title": "Saudação",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Saudacoes",
+      "dialog_node": "node_6_1653144479761",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em matemática os alunos estão com o desempenho abaixo da média, com as notas variando de 3,5 as 5. Essas notas são consideradas baixas, sugiro muito estudo e revisão."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1653081772335",
+      "conditions": "@Matérias:Matemática",
+      "dialog_node": "response_10_1653082229058",
+      "previous_sibling": "response_9_1653082228203"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Na disciplina de matemática, os alunos estão enfrentando dificuldades quando se fala de logaritmos e vetores. O ideal seria um plantão de dúvidas. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1653084805328",
+      "conditions": "@Matérias:Matemática",
+      "dialog_node": "response_10_1653084878981",
+      "previous_sibling": "response_4_1653084878168"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em história os alunos estão indo muito bem, pode ser considerado o melhor desempenho de todos. A média das salas estão entre 8,5 e 9,0."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1653081772335",
+      "conditions": "@Matérias:História",
+      "dialog_node": "response_1_1653082230286",
+      "previous_sibling": "response_10_1653082229058"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Já em história, a dificuldade não é tanta. Os alunos estão indo muito bem porém, seria interessante uma revisão em história do Brasil."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1653084805328",
+      "conditions": "@Matérias:História",
+      "dialog_node": "response_3_1653084879878",
+      "previous_sibling": "response_10_1653084878981"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em geografia, pude perceber que os alunos estão com muita dificuldade no conceito de globalização."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1653084805328",
+      "conditions": "@Matérias:Geografia",
+      "dialog_node": "response_4_1653084878168",
+      "previous_sibling": "response_7_1653084872435"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "$saudacao_usuario, como posso te ajudar hoje?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1653144479761",
+      "context": {
+        "saudacao_usuario": "@saudacao.literal"
+      },
+      "conditions": "@saudacao",
+      "dialog_node": "response_4_1653144508339"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Os alunos estão indo muito bem em Português. As notas estão variando entre 7,0 e 8,5."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1653081772335",
+      "conditions": "@Matérias:Português",
+      "dialog_node": "response_5_1653081924408"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A principal dificuldade dos alunos em português está relacionada ao conteúdo de Orações Subordinadas. O ideal seria realizar um plantão de dúvidas. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1653084805328",
+      "conditions": "@Matérias:Português",
+      "dialog_node": "response_7_1653084872435"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Infelizmente, os alunos não estão com um desempenho muito bom na disciplina de Geografia. As notas estão decaindo bastante, com uma média de 5,5."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1653081772335",
+      "conditions": "@Matérias:Geografia",
+      "dialog_node": "response_9_1653082228203",
+      "previous_sibling": "response_5_1653081924408"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "Ajuda",
+  "language": "pt-br",
+  "description": "Essa skill ajuda o cliente a encontrar o melhor produto para ele, e tira eventuais dúvidas sobre o ecommerce."
+}
