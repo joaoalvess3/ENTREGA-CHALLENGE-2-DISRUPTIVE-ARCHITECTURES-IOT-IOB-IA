@@ -15,3 +15,6 @@ Ano: 2022
 
 # VÍDEO
 LINK PARA O VÍDEO:https://www.youtube.com/watch?v=YOxxrl95ZRg
+
+# OBS
+O nosso Bot não contará com nenhum serviço de reconhecimento facial.
