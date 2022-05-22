@@ -1,17 +1,17 @@
 # ENTREGA-CHALLENGE-2-DISRUPTIVE-ARCHITECTURES-IOT-IOB-IA
 
-#INTEGRANTES
+# INTEGRANTES
 Arthur Henrique Toshiriro Sakamoto Santos - RM86832 
 Gustavo de Cássio Vasselai - RM88264 
 Izadora Amorim Santana - RM88494 
 Joao Armando Alves Neto - RM88255  
 Nathan Santana da Silva - RM88517
 
-#TURMA
+# TURMA
 Turma: 2TDSG
 
-#ANO
+# ANO
 Ano: 2022
 
-#VÍDEO
+# VÍDEO
 LINK PARA O VÍDEO:https://www.youtube.com/watch?v=YOxxrl95ZRg
